@@ -1,0 +1,39 @@
+.header{
+    display: grid;
+    grid-template-columns: 250px auto 200px;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid whitesmoke;
+    padding: 10px;
+}
+.header-left{
+    display: flex;
+    align-items: center;
+}
+.search{
+    display: flex;
+    align-items: center;
+    flex: 0.7;
+}
+.search-email{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    display: flex;
+    flex: 0.7;
+}
+.search-email input{
+    background: transparent;
+    border: 0;
+    outline: 0;
+    flex: 1;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.header-right{
+    display: flex;
+    align-items: center;
+}
+.width{
+    height: 30px !important;
+    width: 30px !important;
+}
