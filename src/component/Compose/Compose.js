@@ -56,6 +56,8 @@ function Compose() {
             description: enterEmail.description.value,
             time: new Date(),
             localtime: new Date().toLocaleTimeString(),
+            read: false,
+            quantity: 1,
           }),
           headers: {
             "Content-Type": "application/json",

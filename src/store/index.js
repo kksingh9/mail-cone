@@ -4,12 +4,11 @@ import composeReducer from "./compose";
 import inboxmailReducer from "./inboxmail";
 
 const store = configureStore({
-   reducer: {
-    auth : authReducer,
-    compose : composeReducer,
-    inboxmail : inboxmailReducer,
-   },
-   
+  reducer: {
+    auth: authReducer,
+    compose: composeReducer,
+    inboxmail: inboxmailReducer,
+  },
 });
 
-export default store ;
+export default store;

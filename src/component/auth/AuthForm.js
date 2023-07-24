@@ -1,13 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./AuthForm.module.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
 import { authSliceActions } from "../../store/auth";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
-  //const isLoggedIn = useSelector(state => state.auth.isAuthenticated)
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useHistory();
   const dispatch = useDispatch();
@@ -29,46 +27,9 @@ const AuthForm = () => {
     setIsLoading(true);
     //let url;
     if (isLogin) {
-      fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDYe7rxDYbi7WgXlIL3QX92DmYYVyXFWho", {
-        method: "POST",
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          // passwordE: enteredConfirmPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => {
-          setIsLoading(false);
-          if (res.ok) {
-            return res.json();
-          } else {
-            return res.json().then((data) => {
-              let errorMessage = "Authentication failed";
-              //   if (data && data.error && data.error.message){
-              //         errorMessage = data.error.message;
-              //   }
-  
-              throw new Error(errorMessage);
-            });
-          }
-        })
-        .then((data) => {
-          //console.log(data);
-  
-          dispatch(authSliceActions.login(data.idToken));
-          navigate.push("/");
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
-        
-    } else {
-      
-        fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDYe7rxDYbi7WgXlIL3QX92DmYYVyXFWho", {
+      fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDYe7rxDYbi7WgXlIL3QX92DmYYVyXFWho",
+        {
           method: "POST",
           body: JSON.stringify({
             email: enteredEmail,
@@ -79,39 +40,72 @@ const AuthForm = () => {
           headers: {
             "Content-Type": "application/json",
           },
+        }
+      )
+        .then((res) => {
+          setIsLoading(false);
+          if (res.ok) {
+            return res.json();
+          } else {
+            return res.json().then((data) => {
+              let errorMessage = "Authentication failed";
+              throw new Error(errorMessage);
+            });
+          }
         })
-          .then((res) => {
-            setIsLoading(false);
-            if (res.ok) {
-             // return res.json();
-            } else {
-              return res.json().then((data) => {
-                let errorMessage = "Authentication failed";
-                //   if (data && data.error && data.error.message){
-                //         errorMessage = data.error.message;
-                //   }
-    
-                throw new Error(errorMessage);
-              });
-            }
-          })
-          .then((data) => {
-            //console.log(data);
-    
-            //dispatch(authActions.login(data.idToken));
-            //navigate.push("/navigation/home");
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
-        
+        .then((data) => {
+          //console.log(data);
+
+          dispatch(authSliceActions.login(data.idToken));
+          navigate.push("/");
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    } else {
+      fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDYe7rxDYbi7WgXlIL3QX92DmYYVyXFWho",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: enteredEmail,
+            password: enteredPassword,
+            // passwordE: enteredConfirmPassword,
+            returnSecureToken: true,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => {
+          setIsLoading(false);
+          if (res.ok) {
+            // return res.json();
+          } else {
+            return res.json().then((data) => {
+              let errorMessage = "Authentication failed";
+
+              throw new Error(errorMessage);
+            });
+          }
+        })
+        .then((data) => {})
+        .catch((err) => {
+          alert(err.message);
+        });
     }
-   
   };
 
   return (
     <section className={classes.authform}>
-      <h1>{isLogin ? "Login" : "Sign Up"}</h1>
+      {/* <h1>{isLogin ? "Login" : "Sign Up"}</h1> */}
+      <img
+        src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/28f079101541375.5f213137aab68.jpg"
+        height={61}
+        width={121}
+        alt="mailbox"
+      />
       <form className={classes.form} onSubmit={onSubmitHandler}>
         <div className={classes.form}>
           <label htmlFor="email">Email Id</label>
@@ -138,7 +132,6 @@ const AuthForm = () => {
           </div>
         )}
         <div className={classes.action}>
-          <Link to="/login/forgetpassword">Forget Password ?</Link>
           <br></br>
           {!isLoading && (
             <button>{isLogin ? "Login" : "Create Account"}</button>
