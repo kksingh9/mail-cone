@@ -54,7 +54,8 @@ function Compose() {
             email: enterEmail.title,
             subject: subject,
             description: enterEmail.description.value,
-            time: new Date().toLocaleTimeString(),
+            time: new Date(),
+            localtime: new Date().toLocaleTimeString(),
           }),
           headers: {
             "Content-Type": "application/json",
@@ -66,6 +67,7 @@ function Compose() {
     } catch (err) {
       console.log(err.message);
     }
+    dispatch(composeSliceActions.hideEditor());
   };
   const hideHandler = () => {
     dispatch(composeSliceActions.hideEditor());

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import classes from "./AuthForm.module.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   //const isLoggedIn = useSelector(state => state.auth.isAuthenticated)
   const [isLoading, setIsLoading] = useState(false);
- // const navigate = useHistory();
+  const navigate = useHistory();
   const dispatch = useDispatch();
 
   const enterEmailInputRef = useRef();
@@ -60,7 +60,7 @@ const AuthForm = () => {
           //console.log(data);
   
           dispatch(authSliceActions.login(data.idToken));
-          //navigate.push("/navigation/home");
+          navigate.push("/");
         })
         .catch((err) => {
           alert(err.message);

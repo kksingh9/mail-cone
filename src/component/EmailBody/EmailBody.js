@@ -3,9 +3,25 @@ import "./EmailBody.css";
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import LabelIcon from '@mui/icons-material/Label';
-function EmailBody({name,subject,description,time}) {
+import { inboxmailSliceActions } from '../../store/inboxmail';
+import { useDispatch } from 'react-redux';
+import {useHistory} from "react-router-dom";
+function EmailBody({name,subject,description,time,id}) {
+  const dispatch = useDispatch();
+  const navigate = useHistory();
+  const emailHandler = () => {
+      dispatch(inboxmailSliceActions.emailDetail({
+        id,
+        name,
+        subject,
+        description,
+        time
+      }))
+      navigate.push("/mail");
+  }
   return (
-    <div className='emailbody'>
+
+    <div className='emailbody' onClick={emailHandler}>
         <div className='emailbody__left'> 
             <CheckBoxOutlineBlankIcon />
             <StarBorderIcon />
@@ -24,6 +40,8 @@ function EmailBody({name,subject,description,time}) {
         </div>
       
     </div>
+  
+  
   )
 }
 
