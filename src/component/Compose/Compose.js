@@ -20,6 +20,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
 import { composeSliceActions } from "../../store/compose";
+import { sentmailSliceActions } from "../../store/sentmail";
 
 function Compose() {
   const dispatch = useDispatch();
@@ -70,6 +71,16 @@ function Compose() {
       console.log(err.message);
     }
     dispatch(composeSliceActions.hideEditor());
+    dispatch(sentmailSliceActions.sentmailbox({
+      id: Math.random().toString(),
+      email: enterEmail.title,
+      subject: subject,
+      description: enterEmail.description.value,
+      time: new Date().toString(),
+      localtime: new Date().toLocaleTimeString(),
+      read: false,
+      quantity: 1,
+    }))
   };
   const hideHandler = () => {
     dispatch(composeSliceActions.hideEditor());

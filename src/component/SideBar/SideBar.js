@@ -17,17 +17,19 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
 import { useDispatch, useSelector } from "react-redux";
 import { composeSliceActions } from "../../store/compose";
+import { sentmailSliceActions } from "../../store/sentmail";
+import { inboxmailSliceActions } from "../../store/inboxmail";
 
 function SideBar() {
   const dispatch = useDispatch();
   const totalmail = useSelector(state => state.inboxmail.totalmail);
-  const sentmail = useSelector(state => state.inboxmail.inboxmail);
-    console.log(totalmail);
+  const sentmail = useSelector(state => state.sentmail.sentmail);
+    console.log(sentmail);
   const composeHandler = () => {
     dispatch(composeSliceActions.showEditor());
   };
   const sendHandler = () => {
-    dispatch(composeSliceActions.addmail(sentmail));
+    dispatch(inboxmailSliceActions.addmail(sentmail));
   }
   return (
     <div className="sidebar">
@@ -52,7 +54,9 @@ function SideBar() {
         title={"Important"}
         number={134}
       />
-      <SidebarOptions Icon={SendIcon} title={"sent"} number={334}  onClick={sendHandler} />
+      <Button startIcon={<SendIcon/>} className="compose__btn" onClick={sendHandler}></Button>
+      
+      {/* <SidebarOptions Icon={SendIcon} title={"sent"} number={334}  /> */}
       <SidebarOptions Icon={DraftsIcon} title={"Draft"} number={34} />
       <SidebarOptions Icon={LabelIcon} title={"Category"} number={24} />
       <SidebarOptions Icon={DeleteIcon} title={"Trash"} number={23} />

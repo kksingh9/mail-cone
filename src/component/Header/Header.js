@@ -25,10 +25,10 @@ const Header = () => {
           </IconButton>
 
           <img
-            src="https://duet-cdn.vox-cdn.com/thumbor/0x0:1320x880/640x427/filters:focal(660x440:661x441):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/21939811/newgmaillogo.jpg"
+            src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/28f079101541375.5f213137aab68.jpg"
             alt="logo"
             height={51}
-            width={51}
+            width={81}
           ></img>
         </div>
         <div className={classes.search}>

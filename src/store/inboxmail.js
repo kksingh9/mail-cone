@@ -12,8 +12,8 @@ const inboxmailSlice = createSlice({
   reducers: {
     addmail(state, action) {
       state.inboxmail = action.payload.sort(
-        ({ localtime: a }, { localtime: b }) => (b > a ? 1 : b < a ? -1 : 0)
-      );
+        ({ localtime: a }, { localtime: b }) => { return (b > a ? 1 : b < a ? -1 : 0) ;
+        });
       let sum = state.inboxmail.reduce((curr, prev) => {
         return curr + parseInt(prev.quantity);
       }, 0);

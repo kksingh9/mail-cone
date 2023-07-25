@@ -4,7 +4,7 @@ import "./SidebarOptions.css";
 function SidebarOptions({Icon,title,number, isactive}) {
   return (
     <div className={`sidebaroptions ${isactive && 'sidebaroptions--active'}`}>
-      <Icon />
+      <Icon  />
       <h2>{title}</h2>
       <p>{number}</p>
     </div>
